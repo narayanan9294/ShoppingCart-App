@@ -1,0 +1,67 @@
+<div class="w3l_banner_nav_right">
+    <!-- login -->
+    <div class="w3_login">
+        <h3>Sign In & Sign Up</h3>
+        <div class="w3_login_module">
+            <div class="module form-module">
+                <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+                    <div class="tooltip">Click Me</div>
+                </div>
+                <div class="form">
+                    <button (click)="getUserData()">Get User Data</button>
+                    <h2>Login to your account</h2>
+                    <!-- <p class="alert alert-danger" *ngIf="msg">{{msg}}</p> -->
+                    <form [formGroup]="loginForm" (submit)="doLogin()">
+                        <input type="text" formControlName="Username" placeholder="Username" required=" ">
+                        <p class="alert alert-danger" *ngIf="userNameCtrl.touched && userNameCtrl.invalid">Please Enter Username</p>
+                        <input type="password" formControlName="Password" placeholder="Password" required=" ">
+                        <p class="alert alert-danger" *ngIf="userPasswordCtrl.touched && userPasswordCtrl.errors?.['required']">Please Enter Password</p>
+                        <p class="alert alert-danger" *ngIf="userPasswordCtrl.touched && userPasswordCtrl.errors?.['minlength']">Please Enter Minimum 4 Charactor</p>
+                        <input type="submit" value="Login" [disabled]="loginForm.invalid">
+                        <!-- {{userPasswordCtrl.errors | json}} -->
+                    </form>
+                </div>
+                <div class="form">
+                    <h2>Create an account</h2>
+
+                    <form (submit)="doRegistration(f)" #f="ngForm">
+                        <p class="alert alert-success" *ngIf="msg">
+                            {{msg}}
+                        </p>
+                        <input type="text" name="Username" #uName="ngModel" ngModel placeholder="Username" (blur)="usernameCheck(uName.value)">
+                        <p class="alert alert-danger" *ngIf="!isUsernameAvail && uName.touched">
+                            Username Already taken
+                        </p>
+
+                        <input type="password" name="Password" ngModel placeholder="Password">
+
+
+                        <input type="email" name="Email" #eMail="ngModel" ngModel placeholder="Email Address" email>
+
+                        <input type="text" name="Phone" #phoneNumber="ngModel" ngModel placeholder="Phone Number">
+
+
+                        <input [disabled]="!isUsernameAvail" type="submit" value="Register">
+
+                    </form>
+                </div>
+                <div class="cta"><a href="#">Forgot your password?</a></div>
+            </div>
+        </div>
+        <!-- <script>
+                    $('.toggle').click(function(){
+                      // Switches the Icon
+                      $(this).children('i').toggleClass('fa-pencil');
+                      // Switches the forms  
+                      $('.form').animate({
+                        height: "toggle",
+                        'padding-top': 'toggle',
+                        'padding-bottom': 'toggle',
+                        opacity: "toggle"
+                      }, "slow");
+                    });
+                </script> -->
+    </div>
+    <!-- //login -->
+</div>
+<div class="clearfix"></div>
